@@ -1,0 +1,24 @@
+version: "3"
+services:
+  cfml:
+    container_name: cfml-taffy-jwt
+    image: ortussolutions/commandbox
+    restart: always
+    environment:
+      PORT: 80
+    volumes:
+      - "./:/app"
+    ports:
+      - 80:80
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost" ]
+      interval: 1m30s
+      timeout: 5s
+      retries: 10
+      start_period: 25s
+
+networks:
+  backend:
+    driver: bridge

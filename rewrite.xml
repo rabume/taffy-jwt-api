@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlrewrite>
+    <rule>
+        <name>Rewrite API</name>
+		<from>^/api/(.+)$</from>
+        <condition type="request-filename" operator="notdir"/>
+        <condition type="request-filename" operator="notfile"/>
+        <to type="passthrough" qsappend="true" >/api/index.cfm/$1</to>
+    </rule>
+</urlrewrite>

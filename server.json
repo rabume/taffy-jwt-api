@@ -1,0 +1,11 @@
+{
+    "web": {
+        "directoryBrowsing": false,
+        "blockCFAdmin": false,
+        "rewrites": {
+            "enable": true,
+            "logEnable": true,
+            "config": "./rewrite.xml"
+        }
+    }
+}
