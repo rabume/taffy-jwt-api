@@ -2,8 +2,7 @@ component extends="taffy.core.api" {
 
     include "../config.cfm";
 
-    // JWT
-    application.jwt = new jwt.models.jwt();
+    // Set global variables
     application.apiSecret = variables.apiSecret;
     application.issJWT = variables.apiName;
     application.apiKey = variables.globalApikey;
@@ -12,9 +11,6 @@ component extends="taffy.core.api" {
     this.mappings["/resources"] = expandPath("./resources");
     this.mappings["/taffy"] = expandPath("./taffy");
     
-    // Set timezone
-    setTimezone("UTC+00:00");
-
     // Set taffy framework settings
     variables.framework = {
         reloadKey = "reload",
@@ -24,15 +20,59 @@ component extends="taffy.core.api" {
         disabledDashboardRedirect = "/",
     }; 
 
-    // this function is called after the request has been parsed and all request details are known
-    function onTaffyRequest(verb, cfc, requestArguments, mimeExt, headers){
+    function onApplicationStart() {
 
-        if(arguments.cfc eq "authenticate") {
-            return true;
+        // Initialize jwt-cfml
+        application.jwt = new jwt.models.jwt();
+
+        // Set timezone
+        setTimezone("UTC+00:00");
+
+        /*     
+            Defines a array that stores data in a way that is not persistent across application 
+            restarts or reinitializations. In a production environment, it would be more appropriate 
+            to store this data in a database or other persistent storage solution to ensure its availability 
+            beyond a single execution of the application.
+        */
+        application.bookStruct = {
+            "books": [
+                {
+                    "name": "Harry Potter and the Goblet of Fire",
+                    "author": "J.K. Rowling",
+                    "pages": "734"
+                },
+                {
+                    "name": "Harry Potter and the Order of the Phoenix",
+                    "author": "J.K. Rowling",
+                    "pages": "912"
+                },
+                {
+                    "name": "The Lord of the Rings",
+                    "author": "J.R.R. Tolkien",
+                    "pages": "1216"
+                },
+                {
+                    "name": "The Fellowship of the Ring",
+                    "author": "J.K. Rowling",
+                    "pages": "432"
+                },
+            ]   
         }
 
+        // Needed to not completly override the onApplicationStart() from taffy
+        super.onApplicationStart();
+    }
+    
+
+    // This function is called after the request has been parsed and all request details are known
+    function onTaffyRequest(verb, cfc, requestArguments, matchedURI, methodMetadata, mimeExt, headers){
+        
+        if(arguments.cfc == "authenticate") {
+            return true;
+        }
+        
         // Check if authorization header exists
-        if(not structKeyExists(arguments.headers, "Authorization")){
+        if(!structKeyExists(arguments.headers, "Authorization")){
             return noData().withStatus(401);
         }
         
@@ -48,7 +88,7 @@ component extends="taffy.core.api" {
         }
 
         // Return 401 when token isn't valid
-        if(not local.IsValidToken){
+        if(!local.IsValidToken){
             return noData().withStatus(401);
         }
 
