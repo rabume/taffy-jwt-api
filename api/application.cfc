@@ -18,7 +18,7 @@ component extends="taffy.core.api" {
     // Set taffy framework settings
     variables.framework = {
         reloadKey = "reload",
-        reloadPassword = "verySecureReloadPassword",
+        reloadPassword = variables.reloadPassword,
         reloadOnEveryRequest = false,
         disableDashboard = true,
         disabledDashboardRedirect = "/",
