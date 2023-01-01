@@ -1,5 +1,9 @@
 <cfscript>
+    // API name
     variables.apiName = "Example-API";
+
+    // Reload / Reinit password
+    variables.reloadPassword = "verySecureReloadPassword";
 
     // Generate a secure secret
     variables.apiSecret = "verySecureSecretThatYouShouldNeverUse";
