@@ -3,7 +3,7 @@ component extends="taffy.core.resource" taffy_uri="/authenticate/{apiKey}" {
     function get(required string apiKey){
 
         // Check if the provided API key is valid
-        local.apiKeyValid = application.apiKey eq arguments.apiKey;
+        local.apiKeyValid = application.apiKey == arguments.apiKey;
 
         // Return 401 when api key isn't valid
         if(not local.apiKeyValid){
