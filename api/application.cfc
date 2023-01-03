@@ -65,7 +65,7 @@ component extends="taffy.core.api" {
     
 
     // This function is called after the request has been parsed and all request details are known
-    function onTaffyRequest(verb, cfc, requestArguments, matchedURI, methodMetadata, mimeExt, headers){
+    function onTaffyRequest(verb, cfc, requestArguments, mimeExt, headers){
         
         if(arguments.cfc == "authenticate") {
             return true;
