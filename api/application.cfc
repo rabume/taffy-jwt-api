@@ -53,7 +53,7 @@ component extends="taffy.core.api" {
                 },
                 {
                     "name": "The Fellowship of the Ring",
-                    "author": "J.K. Rowling",
+                    "author": "J.R.R. Tolkien",
                     "pages": "432"
                 },
             ]   
