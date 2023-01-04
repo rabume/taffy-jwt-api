@@ -34,7 +34,7 @@ component extends="taffy.core.api" {
             to store this data in a database or other persistent storage solution to ensure its availability 
             beyond a single execution of the application.
         */
-        application.bookStruct = {
+        application.books = {
             "books": [
                 {
                     "name": "Harry Potter and the Goblet of Fire",

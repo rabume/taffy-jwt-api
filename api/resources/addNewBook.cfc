@@ -6,7 +6,7 @@ component extends="taffy.core.resource" taffy_uri="/addNewBook" {
             return noData().withStatus(400);
         }
         
-        application.bookStruct.books.append(request._taffyrequest.bodyargs, true);
+        application.books.books.append(request._taffyrequest.bodyargs, true);
         return noData().withStatus(201);
     }
 }
