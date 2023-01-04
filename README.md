@@ -7,4 +7,4 @@ Change the configuration variables inside the `config.cfm` file to your liking.
 Run the command `docker-compose up -d` spin up the container.
 
 **Read related blog post** <br>
-↳ [Creating a Secure REST API with Taffy and JWT Authentication]()
+↳ [Creating a Secure REST API with Taffy and JWT Authentication](https://blog.rabu.me/rest-api-taffy-jwt/)
